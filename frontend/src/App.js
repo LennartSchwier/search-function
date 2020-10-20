@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/macro';
 import TodoList from './components/TodoList';
 import useTodos from './hooks/useTodos';
 import AddTodo from './components/AddTodo';
 import PropTypes from "prop-types";
+import Header from "./components/Header";
 
 
 App.propTypes = {
@@ -25,35 +26,45 @@ TodoList.propTypes = {
     status: PropTypes.oneOf(["OPEN", "IN_PROGRESS", "DONE"]),
     todos: PropTypes.array,
     onDelete: PropTypes.func,
-    onAdvance: PropTypes.func
+    onAdvance: PropTypes.func,
+    searchText: PropTypes.string
 }
 
 export default function App() {
 
+
     const [todos, create, remove, advance] = useTodos();
+    const [searchText, setSearchText] = useState("");
+
 
     return (
         <Main>
-            <h1>Super Kanban Board </h1>
-            <AddTodo onAdd={create} />
+            <Header
+                create={create}
+                searchText={searchText}
+                setSearchText={setSearchText}
+            />
             <Board>
                 <TodoList
                     status="OPEN"
                     todos={todos}
                     onDelete={remove}
                     onAdvance={advance}
+                    searchText={searchText}
                 />
                 <TodoList
                     status="IN_PROGRESS"
                     todos={todos}
                     onDelete={remove}
                     onAdvance={advance}
+                    searchText={searchText}
                 />
                 <TodoList
                     status="DONE"
                     todos={todos}
                     onDelete={remove}
                     onAdvance={advance}
+                    searchText={searchText}
                 />
             </Board>
         </Main>

@@ -12,8 +12,8 @@ Todo.propTypes = {
     description: PropTypes.string
 }
 
-export default function TodoList({ status, todos, onDelete, onAdvance }) {
-    const filteredTodos = todos.filter((todo) => todo.status === status);
+export default function TodoList({ status, todos, onDelete, onAdvance, searchText}) {
+    const filteredTodos = todos.filter((todo) => todo.status === status && todo.description.toLowerCase().includes(searchText.toLowerCase()));
     return (
         <StyledList>
             {filteredTodos.map((todo) => (
