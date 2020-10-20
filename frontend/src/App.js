@@ -3,8 +3,33 @@ import styled from 'styled-components/macro';
 import TodoList from './components/TodoList';
 import useTodos from './hooks/useTodos';
 import AddTodo from './components/AddTodo';
+import PropTypes from "prop-types";
+
+
+App.propTypes = {
+    todos: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
+        description: PropTypes.string,
+        status: PropTypes.oneOf(["OPEN", "IN_PROGRESS", "DONE"])
+    })),
+    create: PropTypes.func,
+    remove: PropTypes.func,
+    advance: PropTypes.func
+}
+
+AddTodo.propTypes = {
+    onAdd: PropTypes.func,
+}
+
+TodoList.propTypes = {
+    status: PropTypes.oneOf(["OPEN", "IN_PROGRESS", "DONE"]),
+    todos: PropTypes.array,
+    onDelete: PropTypes.func,
+    onAdvance: PropTypes.func
+}
 
 export default function App() {
+
     const [todos, create, remove, advance] = useTodos();
 
     return (

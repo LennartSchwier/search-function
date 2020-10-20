@@ -1,6 +1,16 @@
 import React from 'react';
 import Todo from './Todo';
 import styled from 'styled-components';
+import PropTypes from "prop-types";
+
+
+Todo.propTypes = {
+    onDelete: PropTypes.func,
+    onAdvance: PropTypes.func,
+    id: PropTypes.string,
+    status: PropTypes.oneOf(["OPEN", "IN_PROGRESS", "DONE"]),
+    description: PropTypes.string
+}
 
 export default function TodoList({ status, todos, onDelete, onAdvance }) {
     const filteredTodos = todos.filter((todo) => todo.status === status);
